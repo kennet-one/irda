@@ -14,6 +14,22 @@
 #define   MESH_PORT       5555
 
 painlessMesh  mesh;
+IRsend irsend;
+
+void receivedCallback( uint32_t from, String &msg ) {
+
+  String str1 = msg.c_str();
+  String str2 = "ir_ledOn";
+  String str3 = "ir_ledOf";
+
+  if (str1.equals(str2)) {
+    irsend.sendNEC(0xBA45FF00, 32); // 32 - кількість бітів у ІЧ коді
+  }
+
+  if (str1.equals(str3)) {
+    irsend.sendNEC(0xB847FF00, 32);
+  }
+}
 
 void setup() {
 
@@ -24,7 +40,7 @@ void setup() {
 
   IrReceiver.begin(4, ENABLE_LED_FEEDBACK);
 }
-
+// до висилання BA45FF00 це вкл, B847FF00 викл
 
 void loop() {
 

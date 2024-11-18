@@ -1,17 +1,10 @@
 // Node ID: 635036282
 //
-//
-//uint32_t nodeId = mesh.getNodeId();
-//Serial.print("Node ID: ");
-//Serial.println(nodeId);
-
+//добавити управленіє пректором вклл ндмі2 і вкл викл
 
 #include <IRremote.h>
 #include "painlessMesh.h"
-
-#define   MESH_PREFIX     "kennet"
-#define   MESH_PASSWORD   "kennet123"
-#define   MESH_PORT       5555
+#include "mash_parameter.h"
 
 painlessMesh  mesh;
 IRsend irsend;
@@ -48,7 +41,7 @@ void loop() {
 
 
   if (IrReceiver.decode()) {
-    // Получаем сырые данные и сохраняем в переменную         B946FF00 нужна кнопка на пу
+    // Получаем сырые данные и сохраняем в переменную нужна кнопка на пульта
     uint32_t irda = IrReceiver.decodedIRData.decodedRawData;
 
     if (irda == 0xB946FF00 ) {
@@ -66,7 +59,7 @@ void loop() {
 
 
     // Выводим их в монитор порта (отладка)
-    Serial.println(irda,HEX);
+    //Serial.println(irda,HEX);
     
 
     IrReceiver.resume();
